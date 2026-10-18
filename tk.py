@@ -2,6 +2,7 @@
 
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 
 def root():
     
@@ -26,11 +27,8 @@ def root():
             label4.config(textvariable=txt, fg="red", font=("Courier", 9, "bold"))
             
     except ValueError:
+        messagebox.showerror("Error", "Fill in the blanks or don't click submit")
         
-        win = Tk()
-        win.title("Error")
-        win.configure(bg="firebrick")
-        l = Label(win, text="Fill in the blanks or don\'t click submit", fg="black", font=15).pack(padx=10, pady=15)
 def clear():
     
     e1.delete(0, END)
@@ -116,10 +114,7 @@ def bmi():
             lab = Label(frame3, textvariable=txt, fg="maroon").grid(padx=10, pady=10)  
   
     except ValueError:
-        win = Tk()
-        win.title("Error")
-        win.configure(bg="firebrick")
-        labe = Label(win, text="Fill in the blanks correctly or don\'t click submit", fg="black", font=15).pack(padx=10, pady=15)
+         messagebox.showerror("Error", "Fill in the blanks correctly or don't click submit")
     
     
 def clear2():
