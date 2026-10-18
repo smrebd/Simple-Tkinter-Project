@@ -1,154 +1,162 @@
-#-----------Solve The Quadratic Equatin-----------
+# ================= Project: Math & Health Tools =================
 
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
-def root():
+# ================= 1. Quadratic Equation Solver =================
+def solve_quadratic():
     try:
-        a = float(e1.get())
-        b = float(e2.get())
-        c = float(e3.get())
+        a = float(entry_a.get())
+        b = float(entry_b.get())
+        c = float(entry_c.get())
         delta = (b*b) - (4*a*c)
         
         if delta > 0:
             x1 = (-b + delta**.5) / (2*a)
             x2 = (-b - delta**.5) / (2*a)
-            label4.config(text=f"X1 = {x1:.2f}  &  X2 = {x2:.2f}", fg="blue")
+            quad_result_label.config(text=f"X1 = {x1:.2f}  &  X2 = {x2:.2f}", fg="blue")
         elif delta == 0:
             x = -b / (a*2)
-            label4.config(text=f"X = {x:.2f}", fg="yellow")
+            quad_result_label.config(text=f"X = {x:.2f}", fg="yellow")
         else:
-            label4.config(text="Bedone Rishe (delta < 0)", fg="red")
+            quad_result_label.config(text="Bedone Rishe (delta < 0)", fg="red")
             
     except ValueError:
         messagebox.showerror("Error", "Fill in the blanks or don't click submit")
         
-def clear():
-    e1.delete(0, END)
-    e2.delete(0, END)
-    e3.delete(0, END)
-    label4.config(text="")
+def clear_quadratic():
+    entry_a.delete(0, END)
+    entry_b.delete(0, END)
+    entry_c.delete(0, END)
+    quad_result_label.config(text="")
     
-# main window
+# ================= Main Window Setup =================
 window = Tk()
 window.title("Project")
 window.configure(bg="pink")
 window.geometry("520x470")
 
-#First Frame
-frame1 = Frame(window, height=50, highlightbackground="black", highlightthickness=2)
-frame1.grid(padx=10, pady=10)
-l0 = Label(frame1, text="Solve The Quadratic Equatin", fg="black", font=("Courier",12,"bold")).grid(sticky=N, row=0, columnspan=6)
+# --- UI: Quadratic Equation Section ---
+frame_quad = Frame(window, height=50, highlightbackground="black", highlightthickness=2)
+frame_quad.grid(padx=10, pady=10)
 
-#take A ---- column = 0
-e1 = Entry(frame1, width=15, relief=SUNKEN)
-e1.grid(row=0, column=0, padx=10, pady=10)
+# Section Title
+lbl_title_quad = Label(frame_quad, text="Solve The Quadratic Equation", fg="black", font=("Courier",12,"bold"))
+lbl_title_quad.grid(sticky=N, row=0, columnspan=6)
 
-#write (X^2) ---- labe column = 1
-label1 = Label(frame1, height=5, text="X^2  + ", fg="#191970")
-label1.grid(row=0, column=1, padx=10, pady=18)
+# Input for 'a'
+entry_a = Entry(frame_quad, width=15, relief=SUNKEN)
+entry_a.grid(row=0, column=0, padx=10, pady=10)
 
-#take B ---- column = 2
-e2 = Entry(frame1, width=15, relief=SUNKEN)
-e2.grid(row=0, column=2, padx=10, pady=10)
+# Label for 'X^2'
+lbl_x_squared = Label(frame_quad, height=5, text="X^2  + ", fg="#191970")
+lbl_x_squared.grid(row=0, column=1, padx=10, pady=18)
 
-#write (x +) ---- label column = 3
-label2 = Label(frame1, text="X + ", fg="#191970")
-label2.grid(row=0, column=3, padx=10, pady=10)
+# Input for 'b'
+entry_b = Entry(frame_quad, width=15, relief=SUNKEN)
+entry_b.grid(row=0, column=2, padx=10, pady=10)
 
-#take C ---- column = 4
-e3 = Entry(frame1, width=15, relief=SUNKEN)
-e3.grid(row=0, column=4, padx=10, pady=10)
+# Label for 'X'
+lbl_x = Label(frame_quad, text="X + ", fg="#191970")
+lbl_x.grid(row=0, column=3, padx=10, pady=10)
 
-#write (= 0) ---- label column = 5
-label3 = Label(frame1, text="= 0", fg="#191970")
-label3.grid(row=0, column=5, padx=10, pady=10)
+# Input for 'c'
+entry_c = Entry(frame_quad, width=15, relief=SUNKEN)
+entry_c.grid(row=0, column=4, padx=10, pady=10)
 
-#a label that show end answer ----- root answer
-label4 = Label(frame1, width=25, relief=RIDGE, highlightbackground="#ADD8E6", highlightthickness=2)
-label4.grid(row=1, column=0, padx=3, pady=3, columnspan=3)
+# Label for '= 0'
+lbl_equals_zero = Label(frame_quad, text="= 0", fg="#191970")
+lbl_equals_zero.grid(row=0, column=5, padx=10, pady=10)
 
-#buttons
-B_submit = Button(frame1, text="submit", bg="khaki", command=root)
-B_submit.grid(row=1, column=2, columnspan=4, padx=10, pady=10, sticky=N)
+# Result Display
+quad_result_label = Label(frame_quad, width=25, relief=RIDGE, highlightbackground="#ADD8E6", highlightthickness=2)
+quad_result_label.grid(row=1, column=0, padx=3, pady=3, columnspan=3)
 
-B_clear = Button(frame1, text="clear", bg="orange", command=clear)
-B_clear.grid(row=1, column=3, columnspan=4, padx=10, pady=10, sticky=N)
+# Action Buttons
+btn_quad_submit = Button(frame_quad, text="submit", bg="khaki", command=solve_quadratic)
+btn_quad_submit.grid(row=1, column=2, columnspan=4, padx=10, pady=10, sticky=N)
+
+btn_quad_clear = Button(frame_quad, text="clear", bg="orange", command=clear_quadratic)
+btn_quad_clear.grid(row=1, column=3, columnspan=4, padx=10, pady=10, sticky=N)
 
 
-
-#-----------BMI-----------
-
-def bmi():
-    
+# ================= 2. BMI Calculator =================
+def calculate_bmi():
     try:
-        weight = float(E1.get())
-        height = float(E2.get())
+        weight = float(entry_weight.get())
+        height = float(entry_height.get())
         b_bmi = weight / (height**2)
         
         if b_bmi < 18.5:
-            label_bmi.config(text="Underweight", fg="darkslateblue")
+            bmi_result_label.config(text="Underweight", fg="darkslateblue")
         elif 18.5 <= b_bmi <= 24.9:
-            label_bmi.config(text="Healthy", fg="royalblue")
+            bmi_result_label.config(text="Healthy", fg="royalblue")
         elif 25 <= b_bmi <= 29.9:
-            label_bmi.config(text="Overweight", fg="khaki")
+            bmi_result_label.config(text="Overweight", fg="khaki")
         elif 30 <= b_bmi <= 39.9:
-            label_bmi.config(text="Obese", fg="coral")
+            bmi_result_label.config(text="Obese", fg="coral")
         else: 
-            label_bmi.config(text="Extremely Obese", fg="maroon")
+            bmi_result_label.config(text="Extremely Obese", fg="maroon")
             
     except ValueError:
-        
         messagebox.showerror("Error", "Fill in the blanks correctly or don't click submit")
     
     
-def clear2():
-    E1.delete(0, END)
-    E2.delete(0, END)
-    label_bmi.config(text=" ")
+def clear_bmi():
+    entry_weight.delete(0, END)
+    entry_height.delete(0, END)
+    bmi_result_label.config(text=" ")
 
-#Second Frame          
-frame2 = Frame(window, height=50, highlightbackground="black", highlightthickness=2)
-frame2.grid(padx=10, pady=10)
-l1 = Label(frame2, text="BMI", fg="black", font=("Courier",15,"bold")).grid(sticky=N, row=0, columnspan=5)
+# --- UI: BMI Calculator Section ---
+frame_bmi = Frame(window, height=50, highlightbackground="black", highlightthickness=2)
+frame_bmi.grid(padx=10, pady=10)
 
-# enty weight
-E1 = Entry(frame2, width=20, relief=SUNKEN, highlightbackground="black", highlightthickness=2)
-E1.grid(row=1, column=1, padx=20, pady=10)
+# Section Title
+lbl_title_bmi = Label(frame_bmi, text="BMI", fg="black", font=("Courier",15,"bold"))
+lbl_title_bmi.grid(sticky=N, row=0, columnspan=5)
 
-la_w = Label(frame2, text=" weight(kg): ", fg="black").grid(sticky=W, row=1, column=0)
+# Weight Input & Label
+entry_weight = Entry(frame_bmi, width=20, relief=SUNKEN, highlightbackground="black", highlightthickness=2)
+entry_weight.grid(row=1, column=1, padx=20, pady=10)
 
-# entry height
-E2 = Entry(frame2, width=20, relief=SUNKEN, highlightbackground="black", highlightthickness=2)
-E2.grid(row=2, column=1, padx=20, pady=10)
+lbl_weight = Label(frame_bmi, text=" weight(kg): ", fg="black")
+lbl_weight.grid(sticky=W, row=1, column=0)
 
-la_h = Label(frame2, text=" height(m): ", fg="black").grid(sticky=W, row=2, column=0)
+# Height Input & Label
+entry_height = Entry(frame_bmi, width=20, relief=SUNKEN, highlightbackground="black", highlightthickness=2)
+entry_height.grid(row=2, column=1, padx=20, pady=10)
 
-# age ---- combobox
+lbl_height = Label(frame_bmi, text=" height(m): ", fg="black")
+lbl_height.grid(sticky=W, row=2, column=0)
+
+# Age Combobox
 list_numbes_age = list(range(18,46))
-box = ttk.Combobox(frame2, values=list_numbes_age)
-box.grid(row=1, column=3, padx=20, pady=10, columnspan=2)
-box.insert(0,"Your Age")
-box.configure(state="readonly")
+combo_age = ttk.Combobox(frame_bmi, values=list_numbes_age)
+combo_age.grid(row=1, column=3, padx=20, pady=10, columnspan=2)
+combo_age.insert(0,"Your Age")
+combo_age.configure(state="readonly")
 
-# male or female ---- radiobuttons
-var = IntVar()
-B1 = Radiobutton(frame2, text="Female ", value=1, variable=var).grid(row=2, column=3, pady=5)
-B2 = Radiobutton(frame2, text="Male", variable=var, value=2).grid(row=2, column=4, pady=5)
+# Gender Radiobuttons
+gender_var = IntVar()
+radio_female = Radiobutton(frame_bmi, text="Female ", value=1, variable=gender_var)
+radio_female.grid(row=2, column=3, pady=5)
 
-# submit & clear ---- buttons
-B_submit = Button(frame2, text="submit", bg="khaki", command=bmi)
-B_submit.grid(row=4, column=2, columnspan=4, padx=20, pady=20, sticky=W)
+radio_male = Radiobutton(frame_bmi, text="Male", variable=gender_var, value=2)
+radio_male.grid(row=2, column=4, pady=5)
 
-B_clear = Button(frame2, text="clear", bg="orange", command=clear2)
-B_clear.grid(row=4, column=3, columnspan=3, padx=20, pady=20, sticky=N)
+# Action Buttons
+btn_bmi_submit = Button(frame_bmi, text="submit", bg="khaki", command=calculate_bmi)
+btn_bmi_submit.grid(row=4, column=2, columnspan=4, padx=20, pady=20, sticky=W)
 
-# frame that show BMI
-frame3 = Frame(frame2, relief=SUNKEN, highlightbackground="black", highlightthickness=1, width=200, height=20)
-frame3.grid(sticky=N, row=5, columnspan=6, padx=20, pady=20)
+btn_bmi_clear = Button(frame_bmi, text="clear", bg="orange", command=clear_bmi)
+btn_bmi_clear.grid(row=4, column=3, columnspan=3, padx=20, pady=20, sticky=N)
 
-label_bmi = Label(frame3, text=" ", font=("Courier", 10, "bold"), width=20, pady=1)
-label_bmi.grid(row=0, column=0)
+# Result Display Frame
+frame_bmi_result = Frame(frame_bmi, relief=SUNKEN, highlightbackground="black", highlightthickness=1, width=200, height=20)
+frame_bmi_result.grid(sticky=N, row=5, columnspan=6, padx=20, pady=20)
+
+bmi_result_label = Label(frame_bmi_result, text=" ", font=("Courier", 10, "bold"), width=20, pady=1)
+bmi_result_label.grid(row=0, column=0)
 
 window.mainloop()
