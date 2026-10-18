@@ -5,39 +5,30 @@ from tkinter import ttk
 from tkinter import messagebox
 
 def root():
-    
     try:
-        
-        txt = StringVar()
         a = float(e1.get())
         b = float(e2.get())
         c = float(e3.get())
         delta = (b*b) - (4*a*c)
+        
         if delta > 0:
             x1 = (-b + delta**.5) / (2*a)
-            x2 =  (-b - delta**.5) / (2*a)
-            txt.set("  X1 =  " + str(x1)+ "  &  " + "   X2 =   " + str(x2))
-            label4.config(textvariable=txt, fg="blue", font=("Courier",9,"bold"))
+            x2 = (-b - delta**.5) / (2*a)
+            label4.config(text=f"X1 = {x1:.2f}  &  X2 = {x2:.2f}", fg="blue")
         elif delta == 0:
             x = -b / (a*2)
-            txt.set(" X =  " + str(x))
-            label4.config(textvariable=txt, fg="yellow", font=("Courier", 9, "bold"))
+            label4.config(text=f"X = {x:.2f}", fg="yellow")
         else:
-            txt.set("Bedone Rishe(delta < 0)")
-            label4.config(textvariable=txt, fg="red", font=("Courier", 9, "bold"))
+            label4.config(text="Bedone Rishe (delta < 0)", fg="red")
             
     except ValueError:
         messagebox.showerror("Error", "Fill in the blanks or don't click submit")
         
 def clear():
-    
     e1.delete(0, END)
     e2.delete(0, END)
     e3.delete(0, END)
-    
-    txt = StringVar()
-    txt.set("")
-    label4.config(textvariable=txt)
+    label4.config(text="")
     
 # main window
 window = Tk()
