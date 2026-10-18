@@ -90,39 +90,32 @@ B_clear.grid(row=1, column=3, columnspan=4, padx=10, pady=10, sticky=N)
 #-----------BMI-----------
 
 def bmi():
-           
+    
     try:
-        txt = StringVar()
         weight = float(E1.get())
         height = float(E2.get())
         b_bmi = weight / (height**2)
         
         if b_bmi < 18.5:
-            txt.set("Underweight")
-            lab = Label(frame3, textvariable=txt, fg="darkslateblue").grid(padx=10, pady=10)
-        elif 18.5 <= b_bmi <= 24.9 :
-            txt.set("Healthy")
-            lab = Label(frame3, textvariable=txt, fg="royalblue").grid(padx=10, pady=10)
+            label_bmi.config(text="Underweight", fg="darkslateblue")
+        elif 18.5 <= b_bmi <= 24.9:
+            label_bmi.config(text="Healthy", fg="royalblue")
         elif 25 <= b_bmi <= 29.9:
-            txt.set("Overweight")
-            lab = Label(frame3, textvariable=txt, fg="khaki").grid(padx=10, pady=10)
+            label_bmi.config(text="Overweight", fg="khaki")
         elif 30 <= b_bmi <= 39.9:
-            txt.set("Obese")
-            lab = Label(frame3, textvariable=txt, fg="coral").grid(padx=10, pady=10)
-        elif  b_bmi <= 40:
-            txt.set("Extremely Obese")
-            lab = Label(frame3, textvariable=txt, fg="maroon").grid(padx=10, pady=10)  
-  
+            label_bmi.config(text="Obese", fg="coral")
+        else: 
+            label_bmi.config(text="Extremely Obese", fg="maroon")
+            
     except ValueError:
-         messagebox.showerror("Error", "Fill in the blanks correctly or don't click submit")
+        
+        messagebox.showerror("Error", "Fill in the blanks correctly or don't click submit")
     
     
 def clear2():
     E1.delete(0, END)
     E2.delete(0, END)
-    frame3.destroy()
-    frame4 = Frame(frame2, relief=SUNKEN, highlightbackground="black", highlightthickness=2, width=200, height=20)
-    frame4.grid(sticky=N, row=5, columnspan=6, padx=20, pady=20)
+    label_bmi.config(text=" ")
 
 #Second Frame          
 frame2 = Frame(window, height=50, highlightbackground="black", highlightthickness=2)
@@ -133,13 +126,13 @@ l1 = Label(frame2, text="BMI", fg="black", font=("Courier",15,"bold")).grid(stic
 E1 = Entry(frame2, width=20, relief=SUNKEN, highlightbackground="black", highlightthickness=2)
 E1.grid(row=1, column=1, padx=20, pady=10)
 
-la_w = Label(frame2, text="weight(kg): ", fg="black").grid(sticky=W, row=1, column=0)
+la_w = Label(frame2, text=" weight(kg): ", fg="black").grid(sticky=W, row=1, column=0)
 
 # entry height
 E2 = Entry(frame2, width=20, relief=SUNKEN, highlightbackground="black", highlightthickness=2)
 E2.grid(row=2, column=1, padx=20, pady=10)
 
-la_h = Label(frame2, text="height(m) ", fg="black").grid(sticky=W, row=2, column=0)
+la_h = Label(frame2, text=" height(m): ", fg="black").grid(sticky=W, row=2, column=0)
 
 # age ---- combobox
 list_numbes_age = list(range(18,46))
@@ -161,8 +154,10 @@ B_clear = Button(frame2, text="clear", bg="orange", command=clear2)
 B_clear.grid(row=4, column=3, columnspan=3, padx=20, pady=20, sticky=N)
 
 # frame that show BMI
-frame3 = Frame(frame2, relief=SUNKEN, highlightbackground="black", highlightthickness=2, width=200, height=20)
+frame3 = Frame(frame2, relief=SUNKEN, highlightbackground="black", highlightthickness=1, width=200, height=20)
 frame3.grid(sticky=N, row=5, columnspan=6, padx=20, pady=20)
 
+label_bmi = Label(frame3, text=" ", font=("Courier", 10, "bold"), width=20, pady=1)
+label_bmi.grid(row=0, column=0)
 
 window.mainloop()
